@@ -1873,6 +1873,15 @@ WEBVIEW_API int webview_init(struct webview *w) {
                             sel_registerName("stringWithUTF8String:"),
                             "developerExtrasEnabled"));
 
+  class_replaceProperty(__WKPreferences, "webSecurityEnabled", attrs, 2);
+  objc_registerClassPair(__WKPreferences);
+  objc_msgSend(wkPref, sel_registerName("setValue:forKey:"),
+              objc_msgSend((id)objc_getClass("NSNumber"),
+                            sel_registerName("numberWithBool:"), false),
+              objc_msgSend((id)objc_getClass("NSString"),
+                            sel_registerName("stringWithUTF8String:"),
+                            "webSecurityEnabled"));
+
   id userController = objc_msgSend((id)objc_getClass("WKUserContentController"),
                                    sel_registerName("new"));
   objc_setAssociatedObject(userController, "webview", (id)(w),
