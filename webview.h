@@ -43,6 +43,10 @@ extern "C" {
 #include <gtk/gtk.h>
 #include <webkit2/webkit2.h>
 
+#if __APPLE__
+#include <objc/message.h>
+#endif
+
 struct webview_priv {
   GtkWidget *window;
   GtkWidget *scroller;
